@@ -12,8 +12,8 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <h1>Riad's Tic Tac Toe</h1>
-      <h2>This is a work in progress!</h2>
+      <h1>Tic Tac and maybe even a Toe</h1>
+      <h2>Tic</h2>
       <p id="message"></p>
       <section>
         <form id="sign-up-form">
@@ -49,6 +49,16 @@
           <fieldset>
             <legend>Sign Out!</legend>
             <input type="submit" value="Sign out!">
+          </fieldset>
+        </form>
+      </section>
+      <section>
+        <form id="change-password-form">
+          <fieldset>
+            <legend>Change Password!</legend>
+            <input type="password" name="passwords[old]" placeholder="Old Password">
+            <input type="password" name="passwords[new]" placeholder="New Password">
+            <input type="submit" value="Change Password!">
           </fieldset>
         </form>
       </section>
