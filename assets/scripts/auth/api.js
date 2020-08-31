@@ -22,7 +22,7 @@ const signOut = function (data) {
     url: config.apiUrl + '/sign-out',
     method: 'DELETE',
     headers: {
-      Authorization: 'Token token=' + store.user.token
+      Authorization: 'Bearer ' + store.user.token
     },
     data: data
   })

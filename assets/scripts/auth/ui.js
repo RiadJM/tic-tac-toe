@@ -4,16 +4,16 @@ const onSignUpSuccess = function (response) {
   $('#sign-up-form').trigger('reset')
 }
 const onSignUpFailure = function () {
-  $('#message').text('Sign up failed try again')
+  $('#message').text('Sign up FAILED try again')
 }
 
 const onSignInSuccess = function (response) {
   store.user = response.user
-  $('#message').text('Thanks for signing in ' + response.user.email)
+  $('#message').text('Thank you for signing in ' + response.user.email)
   $('#sign-in-form').trigger('reset')
 }
 const onSignInFailure = function () {
-  $('#message').text('Sign in failed try again')
+  $('#message').text('Sign in FAILED try again')
 }
 
 const onSignOutSuccess = function () {
