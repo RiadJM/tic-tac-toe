@@ -51,6 +51,7 @@ const onChangePasswordFailure = function (error) {
 const onCreateGameSuccess = function (response) {
   storeGame.id = response.game._id
   $('#message').text('New Game Created!')
+  console.log(response.game._id)
   console.log('A New Game has started!')
 }
 const onCreateGameFailure = function (error) {

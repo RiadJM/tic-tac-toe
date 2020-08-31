@@ -1,1 +1,56 @@
 @import '~bootstrap/scss/bootstrap';
+.container {
+  // Set the board container to take up 100% of the viewport's height
+  // in this case that's the height of the browser
+  height: 100vh;
+}
+
+.board {
+  // set the max height and the min width of thte board
+  // 100vh - 100% of the viewport height
+  // use a method called `calc` to subtract some space around
+  // each side
+  max-height: calc(100vh - 100px);
+  min-height: 300px;
+  min-width: calc(100vh - 100px);
+  // Setting margin to auto will make the left/right margins the same size
+  // which effectively centers the element.
+  margin: auto;
+  padding: 40px;
+}
+
+.box {
+  // set the minimum height for each box to be a third of the parent's width
+  // (board's height)
+  // The calc method will take 100% of the parent's height and divide it by 3
+  height: calc(600 /3);
+  // we want to have boarders on the right of each box and the bottom of each box
+  border-right: 3px solid black;
+  border-bottom: 3px solid black;
+  // & in sass indicates a nested style. This would be the same as doing
+  // .box:nth-child(3n) in it's own separate block.
+  //
+  // Select the 3 right boxes using `:nth-child` - this will select elements
+  // based on their position to their siblings
+  // Pass `:nth-child()` the value `3n` which will select every 3rd box
+  // 3rd box, then 6th box, then the 9th box
+  &:nth-child(3n) {
+    border-right: 0px;
+  }
+  // Select the bottom boxes using `:nth-last-child` which selects elements
+  // based on their position **counting from the end**
+  // `-1 + 3` represent the last three elements among a group of siblings
+  // Break this down:
+  // when n is 0: (-1 * 0) + 3 = 3rd // third from last box
+  // when n is 1: (-1 * 1) + 2 = 2nd // second to last box
+  // when n is 2: (-1 * 2) + 1 = 1st // first to last (or just last) box
+  // Then we stop because there are no more elements
+  &:nth-last-child(-1n + 3) {
+    border-bottom: 0px;
+  }
+  // Add some color when we hover on a box:
+  &:hover {
+    background-color: LightSteelBlue;
+    cursor: pointer;
+  }
+}

@@ -38,9 +38,7 @@ const onChangePassword = function (event) {
 
 const onCreateGame = function (event) {
   event.preventDefault()
-  const newGame = event.target
-  const data = getFormFields(newGame)
-  api.createGame(data)
+  api.createGame()
     .then(ui.onCreateGameSuccess)
     .catch(ui.onCreateGameFailure)
 }

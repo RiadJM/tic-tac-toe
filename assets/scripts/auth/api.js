@@ -21,9 +21,7 @@ const signOut = function (data) {
   return $.ajax({
     url: config.apiUrl + '/sign-out',
     method: 'DELETE',
-    headers: {
-      Authorization: 'Bearer ' + store.user.token
-    },
+    headers: { Authorization: 'Bearer ' + store.user.token },
     data: data
   })
 }
@@ -32,21 +30,16 @@ const changePassword = function (data) {
   return $.ajax({
     url: config.apiUrl + '/change-password',
     method: 'PATCH',
-    headers: {
-      Authorization: 'Bearer ' + store.user.token
-    },
+    headers: { Authorization: 'Bearer ' + store.user.token },
     data: data
   })
 }
 
-const createGame = function (data) {
+const createGame = function () {
   return $.ajax({
     url: config.apiUrl + '/games',
     method: 'POST',
-    headers: {
-      Authorization: 'Bearer ' + store.user.token
-    },
-    data: data
+    headers: { Authorization: 'Bearer ' + store.user.token }
   })
 }
 
