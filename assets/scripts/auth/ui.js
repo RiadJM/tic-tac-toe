@@ -1,4 +1,6 @@
 const store = require('./../store')
+const storeGame = require('./../store-game.js')
+
 const onSignUpSuccess = function (response) {
   $('#message').text('Thanks for signing up ' + response.user.email)
   $('#sign-up-form').trigger('reset')
@@ -32,11 +34,32 @@ const onSignOutFailure = function (error) {
   console.error('signOutFailure ran. Error is :', error)
 }
 
-const onChangePasswordSuccess = function (response) {
+const onChangePasswordSuccess = function () {
   $('#message').text('Changed password successfully')
+  $('#message').removeClass()
+  $('#message').addClass('success')
+  console.log('changePasswordSuccess ran and nothing was returned!')
 }
-const onChangePasswordFailure = function (response) {
+
+const onChangePasswordFailure = function (error) {
   $('#message').text('Error on change password')
+  $('#message').removeClass()
+  $('#message').addClass('failure')
+  console.error('changePasswordFailure ran. Error is :', error)
+}
+
+const onCreateGameSuccess = function (response) {
+  storeGame.id = response.game._id
+  $('#message').text('New Game Created!')
+  console.log('A New Game has started!')
+}
+const onCreateGameFailure = function (error) {
+  $('#message').text('Create Game Unsuccessful')
+  $('#message').css('background-color', '$alert')
+  $('#message').css('padding', '2em 0')
+
+  console.log('error is ', error)
+  console.log('Could not create new game')
 }
 
 module.exports = {
@@ -47,5 +70,7 @@ module.exports = {
   onSignOutSuccess,
   onSignOutFailure,
   onChangePasswordSuccess,
-  onChangePasswordFailure
+  onChangePasswordFailure,
+  onCreateGameSuccess,
+  onCreateGameFailure
 }
