@@ -23,8 +23,8 @@ const onSignIn = function (event) {
 const onSignOut = function (event) {
   event.preventDefault()
   api.signOut()
-    .then(ui.signOutSuccess)
-    .catch(ui.signOutFailure)
+    .then(ui.onSignOutSuccess)
+    .catch(ui.onSignOutFailure)
 }
 
 const onChangePassword = function (event) {
@@ -38,6 +38,7 @@ const onChangePassword = function (event) {
 
 const onCreateGame = function (event) {
   event.preventDefault()
+
   api.createGame()
     .then(ui.onCreateGameSuccess)
     .catch(ui.onCreateGameFailure)
