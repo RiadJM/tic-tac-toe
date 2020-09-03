@@ -1,5 +1,6 @@
 const config = require('./../config')
 const store = require('../store')
+const storeGame = require('../store-game')
 
 const signUp = function (data) {
   return $.ajax({
@@ -51,11 +52,32 @@ const getGames = function (data) {
   })
 }
 
+const updateGame = function (index, value, over) {
+  if (over === undefined) {
+    over = false
+  }
+  return $.ajax({
+    url: config.apiUrl + '/games/' + storeGame.id,
+    method: 'PATCH',
+    headers: { Authorization: 'Bearer ' + store.user.token },
+    data: {
+      game: {
+        cell: {
+          index: index,
+          value: value
+        },
+        over: over
+      }
+    }
+  })
+}
+
 module.exports = {
   signUp: signUp,
   signIn: signIn,
   signOut: signOut,
   changePassword: changePassword,
   createGame: createGame,
-  getGames: getGames
+  getGames: getGames,
+  updateGame: updateGame
 }
