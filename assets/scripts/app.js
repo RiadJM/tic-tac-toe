@@ -17,4 +17,5 @@ $(() => {
   $('#change-password-form').on('submit', events.onChangePassword)
   $('#create-game').on('submit', events.onCreateGame)
   $('.box').on('click', events.onBoxClick)
+  $('#get-games').on('submit', events.onGetAllGames)
 })

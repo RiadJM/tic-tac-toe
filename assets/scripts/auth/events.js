@@ -53,11 +53,19 @@ const onBoxClick = function (event) {
     .catch(ui.onClickFailure)
 }
 
+const onGetAllGames = function (token) {
+  event.preventDefault()
+  api.getAllGames(store.user.token)
+    .then(ui.onGetAllGamesSuccess)
+    .catch(ui.onGetAllGamesFailure)
+}
+
 module.exports = {
   onSignUp: onSignUp,
   onSignIn: onSignIn,
   onSignOut: onSignOut,
   onChangePassword: onChangePassword,
   onCreateGame: onCreateGame,
-  onBoxClick: onBoxClick
+  onBoxClick: onBoxClick,
+  onGetAllGames: onGetAllGames
 }

@@ -44,7 +44,7 @@ const createGame = function () {
   })
 }
 
-const getGames = function (data) {
+const getAllGames = function (data) {
   return $.ajax({
     url: config.apiUrl + '/games',
     method: 'GET',
@@ -78,6 +78,6 @@ module.exports = {
   signOut: signOut,
   changePassword: changePassword,
   createGame: createGame,
-  getGames: getGames,
+  getAllGames: getAllGames,
   updateGame: updateGame
 }

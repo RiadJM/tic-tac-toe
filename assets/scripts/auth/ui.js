@@ -20,6 +20,7 @@ const onSignInSuccess = function (response) {
   $('#sign-out').show()
   $('#change-password-form').show()
   $('#create-game').show()
+  $('#get-games').show()
 }
 
 const onSignInFailure = function () {
@@ -29,12 +30,12 @@ const onSignInFailure = function () {
 const onSignOutSuccess = function () {
   $('#message').text('Signed out successfully')
   $('#sign-out').hide()
-  $('#change-password').hide()
-  $('#row-Board').hide()
+  $('#change-password-form').hide()
+  $('#board').hide()
   $('#get-games').hide()
-  $('#new-game').hide()
-  $('#sign-up').show()
-  $('#sign-in').show()
+  $('#create-game').hide()
+  $('#sign-up-form').show()
+  $('#sign-in-form').show()
   store.user = null
 }
 
@@ -57,12 +58,25 @@ const onCreateGameSuccess = function (response) {
   storeGame.id = response.game._id
   $('#message').text('New Game Created!')
   $('#board').show()
+  $('#change-password-form').hide()
 }
 
 const onCreateGameFailure = function (error) {
   $('#message').text('Create Game Unsuccessful')
   console.log('error is ', error)
   console.log('Could not create new game')
+}
+
+const onGetAllGamesSuccess = function (response) {
+  $('#board').hide()
+  $('#get-games').text('You have played ' + response.games.length + ' games so far!')
+  $('#get-games').show()
+}
+
+const onGetAllGamesFailure = function (error) {
+  storeGame.error = error
+  $('board').hide()
+  $('#get-games').text('Game History Unsuccessful')
 }
 
 module.exports = {
@@ -75,5 +89,7 @@ module.exports = {
   onChangePasswordSuccess,
   onChangePasswordFailure,
   onCreateGameSuccess,
-  onCreateGameFailure
+  onCreateGameFailure,
+  onGetAllGamesSuccess,
+  onGetAllGamesFailure
 }
