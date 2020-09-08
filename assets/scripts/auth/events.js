@@ -47,10 +47,7 @@ const onCreateGame = function (event) {
 const onBoxClick = function (event) {
   event.preventDefault()
   const boxId = event.target.id
-  const currentPlayer = store.player
-  api.updateGame(boxId, currentPlayer)
-    .then(ui.onClickSuccess)
-    .catch(ui.onClickFailure)
+  ui.onClickSuccess(boxId)
 }
 
 const onGetAllGames = function (token) {

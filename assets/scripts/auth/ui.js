@@ -79,6 +79,21 @@ const onGetAllGamesFailure = function (error) {
   $('#get-games').text('Game History Unsuccessful')
 }
 
+let playerSign = 'x'
+
+const onClickSuccess = function (boxId) {
+  if ($('#' + boxId).text().length === 0) {
+    $('#' + boxId).text(playerSign)
+    if (playerSign === 'x') {
+      playerSign = 'o'
+    } else {
+      playerSign = 'x'
+    }
+    // playerSign = playerSign === 'X' ? 'O' : 'X' // huy fucker put it at the end not to
+    // fuck with API
+    // another way
+  }
+}
 module.exports = {
   onSignUpSuccess,
   onSignUpFailure,
@@ -91,5 +106,6 @@ module.exports = {
   onCreateGameSuccess,
   onCreateGameFailure,
   onGetAllGamesSuccess,
-  onGetAllGamesFailure
+  onGetAllGamesFailure,
+  onClickSuccess
 }
