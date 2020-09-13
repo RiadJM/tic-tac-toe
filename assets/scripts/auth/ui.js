@@ -1,5 +1,6 @@
 const store = require('./../store')
 const storeGame = require('./../store-game.js')
+const api = require('./api')
 
 const onSignUpSuccess = function (response) {
   $('#message').text('Thanks for signing up ' + response.user.email)
@@ -75,25 +76,67 @@ const onGetAllGamesSuccess = function (response) {
 
 const onGetAllGamesFailure = function (error) {
   storeGame.error = error
-  $('board').hide()
+  $('#board').hide()
   $('#get-games').text('Game History Unsuccessful')
 }
 
-let playerSign = 'x'
+const gameStage = {
+  playerTurn: 'X',
+  board: ['', '', '', '', '', '', '', '', '']
+}
+const winArray = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6]
+]
+
+const checkWinner = function () {
+  return winArray.some(row => {
+    return row.every(index => {
+      return gameStage.board[index].includes(gameStage.playerTurn)
+    })
+  })
+}
 
 const onClickSuccess = function (boxId) {
   if ($('#' + boxId).text().length === 0) {
-    $('#' + boxId).text(playerSign)
-    if (playerSign === 'x') {
-      playerSign = 'o'
+    gameStage.board[boxId] = gameStage.playerTurn
+    $('#' + boxId).text(gameStage.playerTurn)
+    $('#message-failure').hide()
+
+    if (checkWinner(gameStage)) {
+      $('#player-turn').hide()
+      $('.board').hide()
+      $('#restart').show()
+      api.updateGame(boxId, gameStage.playerTurn, true)
+    } else if (gameStage.board.every(a => a === 'X' || a === 'O')) {
+      // check tie
+
+      $('#message').text('Tie Game!!!!!!!')
+      $('#player-turn').hide()
+      $('.board').hide()
+      $('#restart').show()
+      api.updateGame(boxId, gameStage.playerTurn, true)
     } else {
-      playerSign = 'x'
+      // keep playing
+
+      api.updateGame(boxId, gameStage.playerTurn, false)
     }
-    // playerSign = playerSign === 'X' ? 'O' : 'X' // huy fucker put it at the end not to
-    // fuck with API
-    // another way
+
+    // rotate turn
+    gameStage.playerTurn = gameStage.playerTurn === 'X' ? 'O' : 'X'
+    $('#player-turn').text('Current player: ' + gameStage.playerTurn)
+  } else {
+    $('#message-failure').show()
+    $('#message-failure').text('Invalid Move')
   }
 }
+
 module.exports = {
   onSignUpSuccess,
   onSignUpFailure,

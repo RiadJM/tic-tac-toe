@@ -55,7 +55,7 @@ const getAllGames = function (data) {
 const updateGame = function (index, value, over) {
 //  if (over === undefined) {
 //    over = false
-//s  }
+// s  }
   return $.ajax({
     url: config.apiUrl + '/games/' + storeGame.id,
     method: 'PATCH',
