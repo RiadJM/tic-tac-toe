@@ -37,6 +37,8 @@ const onSignOutSuccess = function () {
   $('#create-game').hide()
   $('#sign-up-form').show()
   $('#sign-in-form').show()
+  $('#restart-game').hide()
+  $('#player-turn').hide()
   store.user = null
 }
 
@@ -63,7 +65,7 @@ const onCreateGameSuccess = function (response) {
   $('#create-game').hide()
   $('#player-turn').show()
   $('#player-turn').text('Current player: X')
-  $('get-games').show()
+  $('get-games').hide()
 }
 
 const onCreateGameFailure = function () {
@@ -73,8 +75,9 @@ const onCreateGameFailure = function () {
 }
 
 const onGetAllGamesSuccess = function (response) {
-  $('#get-games').text('You have played ' + response.games.length + ' games so far!')
-  $('#get-games').show()
+  $('#get-games-message').text('You have played ' + response.games.length + ' games so far!')
+  $('#get-games-message').show()
+  $('#get-games-message').hide(3000)
 }
 
 const onGetAllGamesFailure = function (error) {
@@ -117,6 +120,7 @@ const onClickSuccess = function (boxId) {
       $('#player-turn').hide()
       $('.board').hide()
       $('#restart-game').show()
+      $('#get-games').show()
       api.updateGame(boxId, gameStage.playerTurn, true)
     } else if (gameStage.board.every(a => a === 'X' || a === 'O')) {
       // check tie
