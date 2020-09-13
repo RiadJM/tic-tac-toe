@@ -12,6 +12,7 @@ $(() => {
   $('#create-game').hide()
   $('#board').hide()
   $('#restart-game').hide()
+  $('#get-games').hide()
   $('#sign-up-form').on('submit', events.onSignUp)
   $('#sign-in-form').on('submit', events.onSignIn)
   $('#sign-out').on('submit', events.onSignOut)

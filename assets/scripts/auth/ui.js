@@ -60,16 +60,19 @@ const onCreateGameSuccess = function (response) {
   $('#message').text('New Game Created!')
   $('#board').show()
   $('#change-password-form').hide()
+  $('#create-game').hide()
+  $('#player-turn').show()
+  $('#player-turn').text('Current player: X')
+  $('get-games').show()
 }
 
-const onCreateGameFailure = function (error) {
+const onCreateGameFailure = function () {
   $('#message').text('Create Game Unsuccessful')
-  console.log('error is ', error)
-  console.log('Could not create new game')
+  $('#message-failure').show()
+  $('#message-failure').text('Create Game Unsuccessful!')
 }
 
 const onGetAllGamesSuccess = function (response) {
-  $('#board').hide()
   $('#get-games').text('You have played ' + response.games.length + ' games so far!')
   $('#get-games').show()
 }
@@ -110,6 +113,7 @@ const onClickSuccess = function (boxId) {
     $('#message-failure').hide()
 
     if (checkWinner(gameStage)) {
+      $('#message').text('Player ' + gameStage.playerTurn + ' WINS!')
       $('#player-turn').hide()
       $('.board').hide()
       $('#restart-game').show()
@@ -117,7 +121,7 @@ const onClickSuccess = function (boxId) {
     } else if (gameStage.board.every(a => a === 'X' || a === 'O')) {
       // check tie
 
-      $('#message').text('Tie Game!!!!!!!')
+      $('#message').text('Tie Game!')
       $('#player-turn').hide()
       $('.board').hide()
       $('#restart-game').show()
@@ -146,12 +150,15 @@ const onRestartSuccess = function (response) {
   $('#message-failure').hide()
   $('#message').text('Game Restarted!')
   $('.board').show()
+  $('#player-turn').show()
+  $('#player-turn').text('Current player: X')
+  $('#get-games').show()
 }
 
-const onRestartFailure = function (error) {
+const onRestartFailure = function () {
   $('#message').text('Restart Game Unsuccessful')
-  console.log('error is ', error)
-  console.log('Could not create new game')
+  $('#message-failure').show()
+  $('#message-failure').text('Restart Game Unsuccessful!')
 }
 
 module.exports = {
