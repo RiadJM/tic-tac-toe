@@ -11,6 +11,7 @@ $(() => {
   $('#change-password-form').hide()
   $('#create-game').hide()
   $('#board').hide()
+  $('#restart-game').hide()
   $('#sign-up-form').on('submit', events.onSignUp)
   $('#sign-in-form').on('submit', events.onSignIn)
   $('#sign-out').on('submit', events.onSignOut)
@@ -18,4 +19,5 @@ $(() => {
   $('#create-game').on('submit', events.onCreateGame)
   $('.box').on('click', events.onBoxClick)
   $('#get-games').on('submit', events.onGetAllGames)
+  $('#restart-game').on('submit', events.onRestartGame)
 })

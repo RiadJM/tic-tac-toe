@@ -57,6 +57,13 @@ const onGetAllGames = function (token) {
     .catch(ui.onGetAllGamesFailure)
 }
 
+const onRestartGame = function (event) {
+  event.preventDefault()
+  api.createGame()
+    .then(ui.onRestartSuccess)
+    .catch(ui.onRestartFailure)
+}
+
 module.exports = {
   onSignUp: onSignUp,
   onSignIn: onSignIn,
@@ -64,5 +71,6 @@ module.exports = {
   onChangePassword: onChangePassword,
   onCreateGame: onCreateGame,
   onBoxClick: onBoxClick,
-  onGetAllGames: onGetAllGames
+  onGetAllGames: onGetAllGames,
+  onRestartGame: onRestartGame
 }

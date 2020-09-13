@@ -112,7 +112,7 @@ const onClickSuccess = function (boxId) {
     if (checkWinner(gameStage)) {
       $('#player-turn').hide()
       $('.board').hide()
-      $('#restart').show()
+      $('#restart-game').show()
       api.updateGame(boxId, gameStage.playerTurn, true)
     } else if (gameStage.board.every(a => a === 'X' || a === 'O')) {
       // check tie
@@ -120,7 +120,7 @@ const onClickSuccess = function (boxId) {
       $('#message').text('Tie Game!!!!!!!')
       $('#player-turn').hide()
       $('.board').hide()
-      $('#restart').show()
+      $('#restart-game').show()
       api.updateGame(boxId, gameStage.playerTurn, true)
     } else {
       // keep playing
@@ -137,6 +137,23 @@ const onClickSuccess = function (boxId) {
   }
 }
 
+const onRestartSuccess = function (response) {
+  storeGame.id = response.game._id
+  gameStage.playerTurn = 'X'
+  gameStage.board = ['', '', '', '', '', '', '', '', '']
+  $('.box').text('')
+  $('#message').show()
+  $('#message-failure').hide()
+  $('#message').text('Game Restarted!')
+  $('.board').show()
+}
+
+const onRestartFailure = function (error) {
+  $('#message').text('Restart Game Unsuccessful')
+  console.log('error is ', error)
+  console.log('Could not create new game')
+}
+
 module.exports = {
   onSignUpSuccess,
   onSignUpFailure,
@@ -150,5 +167,7 @@ module.exports = {
   onCreateGameFailure,
   onGetAllGamesSuccess,
   onGetAllGamesFailure,
-  onClickSuccess
+  onClickSuccess,
+  onRestartSuccess,
+  onRestartFailure
 }
