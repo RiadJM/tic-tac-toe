@@ -42,9 +42,8 @@ const onSignOutSuccess = function () {
   store.user = null
 }
 
-const onSignOutFailure = function (error) {
+const onSignOutFailure = function () {
   $('#message').text('Error on sign out')
-  console.error('signOutFailure ran. Error is :', error)
 }
 
 const onChangePasswordSuccess = function () {
@@ -52,9 +51,8 @@ const onChangePasswordSuccess = function () {
   $('#change-password-form').trigger('reset')
 }
 
-const onChangePasswordFailure = function (error) {
+const onChangePasswordFailure = function () {
   $('#message').text('Error on change password')
-  console.error('changePasswordFailure ran. Error is :', error)
 }
 
 const onCreateGameSuccess = function (response) {
